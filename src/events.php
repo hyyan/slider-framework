@@ -41,4 +41,20 @@ interface Hyyan_Slider_Events {
      */
     const FILTER_SLIDE_MESSAGES = 'Hyyan\Slider.slide.messages';
 
+    /**
+     * Filter Slider Lables
+     * 
+     * the filter is fired to change the default lables of the custom taxonomy before
+     * the cusotm taxonomy is registered.
+     */
+    const FILTER_SLIDER_LABLES = 'Hyyan\Slider.slider.lables';
+
+    /**
+     * Filter Slider Args
+     * 
+     * the filter is fired to change the default arguments of the custom taxonomy before
+     * the cusotm taxonomy is registered.
+     */
+    const FILTER_SLIDER_ARGS = 'Hyyan\Slider.slider.args';
+
 }

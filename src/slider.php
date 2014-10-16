@@ -56,6 +56,7 @@ class Hyyan_Slider {
      */
     public function init() {
         $this->addCustomPost();
+        $this->addCustomTaxonomy();
     }
 
     /**
@@ -164,6 +165,70 @@ class Hyyan_Slider {
         ));
 
         return $messages;
+    }
+
+    /**
+     * Add custom taxonomy
+     * 
+     * Register custom taxonomy to be used with this custom post
+     * 
+     * @see Hyyan_Slider_Events::FILTER_SLIDER_LABLES
+     * @see Hyyan_Slider_Events::FILTER_SLIDER_ARGS
+     */
+    public function addCustomTaxonomy() {
+        /**
+         * Default custom taxonomy lables
+         * 
+         * @see Hyyan_Slider_Events::FILTER_SLIDER_LABLES
+         * 
+         * @var array 
+         */
+        $labels = apply_filters(Hyyan_Slider_Events::FILTER_SLIDER_LABLES, array(
+            'name' => __('Sliders', self::TEXTDOMAIN),
+            'singular_name' => _x('Slider', 'taxonomy general name', self::TEXTDOMAIN),
+            'search_items' => __('Search Sliders', self::TEXTDOMAIN),
+            'popular_items' => __('Popular Sliders', self::TEXTDOMAIN),
+            'all_items' => __('All Sliders', self::TEXTDOMAIN),
+            'parent_item' => __('Parent Slider', self::TEXTDOMAIN),
+            'parent_item_colon' => __('Parent Slider:', self::TEXTDOMAIN),
+            'edit_item' => __('Edit Slider', self::TEXTDOMAIN),
+            'update_item' => __('Update Slider', self::TEXTDOMAIN),
+            'add_new_item' => __('New Slider', self::TEXTDOMAIN),
+            'new_item_name' => __('New Slider', self::TEXTDOMAIN),
+            'separate_items_with_commas' => __('Sliders separated by comma', self::TEXTDOMAIN),
+            'add_or_remove_items' => __('Add or remove Sliders', self::TEXTDOMAIN),
+            'choose_from_most_used' => __('Choose from the most used Sliders', self::TEXTDOMAIN),
+            'menu_name' => __('Sliders', self::TEXTDOMAIN),
+        ));
+
+        /**
+         * Default custom taxonomy arguments
+         * 
+         * @see Hyyan_Slider_Events::FILTER_SLIDER_ARGS
+         * 
+         * @var array 
+         */
+        $args = apply_filters(Hyyan_Slider_Events::FILTER_SLIDER_ARGS, array(
+            'labels' => $labels,
+            'hierarchical' => false,
+            'public' => false,
+            'show_in_nav_menus' => true,
+            'show_ui' => true,
+            'show_admin_column' => true,
+            'query_var' => false,
+            'rewrite' => false,
+            'capabilities' => array(
+                'manage_terms' => 'edit_posts',
+                'edit_terms' => 'edit_posts',
+                'delete_terms' => 'edit_posts',
+                'assign_terms' => 'edit_posts'
+            ),
+        ));
+
+        /**
+         * Register the custom taxonomy
+         */
+        register_taxonomy(self::CUSTOM_TAXONOMY, array(self::CUSTOM_POST), $args);
     }
 
 }
