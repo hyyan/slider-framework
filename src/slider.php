@@ -9,6 +9,7 @@
  */
 
 require_once __DIR__ . '/events.php';
+require_once __DIR__ . '/table.php';
 
 /**
  * HyyanSlider
@@ -57,6 +58,9 @@ class Hyyan_Slider {
     public function init() {
         $this->addCustomPost();
         $this->addCustomTaxonomy();
+
+        $table = new Hyyan_Slider_Table(self::CUSTOM_POST, self::CUSTOM_TAXONOMY);
+        $table->registerSliderFilter();
     }
 
     /**
