@@ -59,8 +59,15 @@ class Hyyan_Slider {
         $this->addCustomPost();
         $this->addCustomTaxonomy();
 
-        $table = new Hyyan_Slider_Table(self::CUSTOM_POST, self::CUSTOM_TAXONOMY);
+        add_image_size('slide_preview', 55, 55, true);
+        $table = new Hyyan_Slider_Table(
+                self::CUSTOM_POST
+                , self::CUSTOM_TAXONOMY
+                , self::TEXTDOMAIN
+                , 'slide_preview'
+        );
         $table->registerSliderFilter();
+        $table->registerSlidePreviewColumn();
     }
 
     /**

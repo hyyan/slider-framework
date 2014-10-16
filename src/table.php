@@ -16,6 +16,13 @@
 class Hyyan_Slider_Table {
 
     /**
+     * The name of preview column
+     * 
+     * @var string 
+     */
+    const PREVIEW_COLUMN_NAME = 'slide-preview';
+
+    /**
      * The custom post name
      * 
      * @var string
@@ -30,16 +37,70 @@ class Hyyan_Slider_Table {
     protected $taxName;
 
     /**
+     * The translation textdomain
+     * 
+     * @var string
+     */
+    protected $textdomain;
+
+    /**
+     * The size name of the preview image
+     * 
+     * @var string
+     */
+    protected $sizeName;
+
+    /**
      * Constrcut
      * 
      * Extend the the default preview of the slides table
      * 
      * @param string $postName the custom post name
      * @param string $taxName the custom tax name
+     * @param string $textdomain the translation text domain
+     * @param string $sizeName the size name of the preview image
      */
-    public function __construct($postName, $taxName) {
+    public function __construct($postName, $taxName, $textdomain, $sizeName = '') {
         $this->postName = $postName;
         $this->taxName = $taxName;
+        $this->textdomain = $textdomain;
+        $this->sizeName = $sizeName;
+    }
+
+    /**
+     * Add preview column 
+     * 
+     * Add slider preview column to the table view
+     * 
+     * @param array $columns
+     * @return array columns array
+     */
+    public function addSlidePreviewColumn($columns) {
+        return array_merge($columns, array(
+            self::PREVIEW_COLUMN_NAME => __('Slide', $this->textdomain)
+        ));
+    }
+
+    /**
+     * Print the slide preview(feature image) for every slide
+     * 
+     * @param string $name
+     * @param int $id
+     */
+    public function printSlidePreview($name, $id) {
+        if ($name != self::PREVIEW_COLUMN_NAME)
+            return;
+        
+        $id = get_post_thumbnail_id($id);
+        if ($id) {
+            $img = wp_get_attachment_image_src(
+                    $id
+                    , apply_filters(Hyyan_Slider_Events::FILTER_SLIDE_PREVIEW_SIZE_NAME, $this->sizeName)
+            );
+            if (($preview = $img[0])) {
+                echo '<img src="' . $preview . '" />';
+            }
+        }
     }
 
     /**
@@ -84,6 +145,14 @@ class Hyyan_Slider_Table {
             $term = get_term_by('id', $queryVars[$this->taxName], $this->taxName);
             $queryVars[$this->taxName] = $term->slug;
         }
+    }
+
+    /**
+     * Register slide preview column
+     */
+    public function registerSlidePreviewColumn() {
+        add_filter("manage_edit-{$this->postName}_columns", array($this, 'addSlidePreviewColumn'));
+        add_action("manage_{$this->postName}_posts_custom_column", array($this, 'printSlidePreview'), 10, 2);
     }
 
     /**

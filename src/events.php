@@ -57,4 +57,12 @@ interface Hyyan_Slider_Events {
      */
     const FILTER_SLIDER_ARGS = 'Hyyan\Slider.slider.args';
 
+    /**
+     * Filter slide preview size
+     * 
+     * the filter is fired to change the default size name used to display the slide 
+     * preview
+     */
+    const FILTER_SLIDE_PREVIEW_SIZE_NAME = 'Hyyan\Slider.slide.preview-size-name';
+
 }
