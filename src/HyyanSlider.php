@@ -20,6 +20,27 @@ require_once __DIR__ . '/HyyanSliderEvents.php';
 class HyyanSlider {
 
     /**
+     * The custom post name
+     * 
+     * @var string 
+     */
+    const CUSTOM_POST = 'hyyan-slide';
+
+    /**
+     * The custom taxonomy name
+     * 
+     * @var string 
+     */
+    const CUSTOM_TAXONOMY = 'hyyan-slider';
+
+    /**
+     * The translation textdomain
+     * 
+     * @var string 
+     */
+    const TEXTDOMAIN = 'hyyan-slider';
+
+    /**
      * Constrcutor
      * 
      * Constrcut the plugin api
@@ -55,19 +76,19 @@ class HyyanSlider {
          * @var array 
          */
         $labels = apply_filters(HyyanSliderEvents::FILTER_SLIDE_LABLES, array(
-            'name' => __('Slides', 'hyyan-slider'),
-            'singular_name' => __('Slide', 'hyyan-slider'),
-            'all_items' => __('Slides', 'hyyan-slider'),
-            'new_item' => __('New Slide', 'hyyan-slider'),
-            'add_new' => __('Add New', 'hyyan-slider'),
-            'add_new_item' => __('Add New Slide', 'hyyan-slider'),
-            'edit_item' => __('Edit Slide', 'hyyan-slider'),
-            'view_item' => __('View Slide', 'hyyan-slider'),
-            'search_items' => __('Search Slides', 'hyyan-slider'),
-            'not_found' => __('No Slides found', 'hyyan-slider'),
-            'not_found_in_trash' => __('No Slides found in trash', 'hyyan-slider'),
-            'parent_item_colon' => __('Parent Slide', 'hyyan-slider'),
-            'menu_name' => __('Slides', 'hyyan-slider'),
+            'name' => __('Slides', self::TEXTDOMAIN),
+            'singular_name' => __('Slide', self::TEXTDOMAIN),
+            'all_items' => __('Slides', self::TEXTDOMAIN),
+            'new_item' => __('New Slide', self::TEXTDOMAIN),
+            'add_new' => __('Add New', self::TEXTDOMAIN),
+            'add_new_item' => __('Add New Slide', self::TEXTDOMAIN),
+            'edit_item' => __('Edit Slide', self::TEXTDOMAIN),
+            'view_item' => __('View Slide', self::TEXTDOMAIN),
+            'search_items' => __('Search Slides', self::TEXTDOMAIN),
+            'not_found' => __('No Slides found', self::TEXTDOMAIN),
+            'not_found_in_trash' => __('No Slides found in trash', self::TEXTDOMAIN),
+            'parent_item_colon' => __('Parent Slide', self::TEXTDOMAIN),
+            'menu_name' => __('Slides', self::TEXTDOMAIN),
         ));
 
         /**
@@ -127,19 +148,19 @@ class HyyanSlider {
          */
         $messages['hyyan-slide'] = apply_filters(HyyanSliderEvents::FILTER_SLIDE_MESSAGES, array(
             0 => '', // Unused. Messages start at index 1.
-            1 => __('Slide updated.', 'hyyan-slider'),
-            2 => __('Custom field updated.', 'hyyan-slider'),
-            3 => __('Custom field deleted.', 'hyyan-slider'),
-            4 => __('Slide updated.', 'hyyan-slider'),
+            1 => __('Slide updated.', self::TEXTDOMAIN),
+            2 => __('Custom field updated.', self::TEXTDOMAIN),
+            3 => __('Custom field deleted.', self::TEXTDOMAIN),
+            4 => __('Slide updated.', self::TEXTDOMAIN),
             /* translators: %s: date and time of the revision */
-            5 => isset($_GET['revision']) ? sprintf(__('Slide restored to revision from %s', 'hyyan-slider'), wp_post_revision_title((int) $_GET['revision'], false)) : false,
-            6 => __('Slide published.', 'hyyan-slider'),
-            7 => __('Slide saved.', 'hyyan-slider'),
-            8 => __('Slide submitted.', 'hyyan-slider'),
-            9 => sprintf(__('Slide scheduled for: <strong>%1$s</strong>', 'hyyan-slider'),
+            5 => isset($_GET['revision']) ? sprintf(__('Slide restored to revision from %s', self::TEXTDOMAIN), wp_post_revision_title((int) $_GET['revision'], false)) : false,
+            6 => __('Slide published.', self::TEXTDOMAIN),
+            7 => __('Slide saved.', self::TEXTDOMAIN),
+            8 => __('Slide submitted.', self::TEXTDOMAIN),
+            9 => sprintf(__('Slide scheduled for: <strong>%1$s</strong>', self::TEXTDOMAIN),
                     // translators: Publish box date format, see http://php.net/date
                     date_i18n(__('M j, Y @ G:i'), strtotime($post->post_date))),
-            10 => __('Slide draft updated.', 'hyyan-slider'),
+            10 => __('Slide draft updated.', self::TEXTDOMAIN),
         ));
 
         return $messages;
