@@ -25,6 +25,6 @@ if (!defined('ABSPATH'))
     exit('restricted access');
 
 
-require_once __DIR__ . '/src/HyyanSlider.php';
+require_once __DIR__ . '/src/slider.php';
 
-new HyyanSlider();
+new Hyyan_Slider();

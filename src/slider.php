@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-require_once __DIR__ . '/HyyanSliderEvents.php';
+require_once __DIR__ . '/events.php';
 
 /**
  * HyyanSlider
@@ -17,7 +17,7 @@ require_once __DIR__ . '/HyyanSliderEvents.php';
  *
  * @author Hyyan
  */
-class HyyanSlider {
+class Hyyan_Slider {
 
     /**
      * The custom post name
@@ -63,19 +63,19 @@ class HyyanSlider {
      * 
      * Register the custom post 
      * 
-     * @see HyyanSliderEvents::FILTER_SLIDE_LABLES
-     * @see HyyanSliderEvents::FILTER_SLIDE_ARGS
+     * @see Hyyan_Slider_Events::FILTER_SLIDE_LABLES
+     * @see Hyyan_Slider_Events::FILTER_SLIDE_ARGS
      * @see HyyanSlider::addCutomPostMessages
      */
     public function addCustomPost() {
         /**
          * Default custom post lables
          * 
-         * @see HyyanSliderEvents::FILTER_SLIDE_LABLES
+         * @see Hyyan_Slider_Events::FILTER_SLIDE_LABLES
          * 
          * @var array 
          */
-        $labels = apply_filters(HyyanSliderEvents::FILTER_SLIDE_LABLES, array(
+        $labels = apply_filters(Hyyan_Slider_Events::FILTER_SLIDE_LABLES, array(
             'name' => __('Slides', self::TEXTDOMAIN),
             'singular_name' => __('Slide', self::TEXTDOMAIN),
             'all_items' => __('Slides', self::TEXTDOMAIN),
@@ -94,11 +94,11 @@ class HyyanSlider {
         /**
          * Default custom post arguments
          * 
-         * @see HyyanSliderEvents::FILTER_SLIDE_ARGS
+         * @see Hyyan_Slider_Events::FILTER_SLIDE_ARGS
          * 
          * @var array 
          */
-        $args = apply_filters(HyyanSliderEvents::FILTER_SLIDE_ARGS, array(
+        $args = apply_filters(Hyyan_Slider_Events::FILTER_SLIDE_ARGS, array(
             'labels' => $labels,
             'public' => false,
             'exclude_from_search' => true,
@@ -129,7 +129,7 @@ class HyyanSlider {
      * 
      * Register the custom post messages
      * 
-     * @see HyyanSliderEvents::FILTER_SLIDE_MESSAGES
+     * @see Hyyan_Slider_Events::FILTER_SLIDE_MESSAGES
      * 
      * @global WP_Post $post
      * @param array $messages
@@ -144,9 +144,9 @@ class HyyanSlider {
         /**
          * Add custom post messages
          * 
-         * @see HyyanSliderEvents::FILTER_SLIDE_MESSAGES
+         * @see Hyyan_Slider_Events::FILTER_SLIDE_MESSAGES
          */
-        $messages['hyyan-slide'] = apply_filters(HyyanSliderEvents::FILTER_SLIDE_MESSAGES, array(
+        $messages['hyyan-slide'] = apply_filters(Hyyan_Slider_Events::FILTER_SLIDE_MESSAGES, array(
             0 => '', // Unused. Messages start at index 1.
             1 => __('Slide updated.', self::TEXTDOMAIN),
             2 => __('Custom field updated.', self::TEXTDOMAIN),

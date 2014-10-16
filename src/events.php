@@ -15,7 +15,7 @@
  * 
  * @author Hyyan
  */
-interface HyyanSliderEvents {
+interface Hyyan_Slider_Events {
 
     /**
      * Filter Slide Lables
