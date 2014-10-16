@@ -114,7 +114,7 @@ class Hyyan_Slider {
         /*
          * Register the post type
          */
-        register_post_type('hyyan-slide', $args);
+        register_post_type(self::CUSTOM_POST, $args);
 
         /**
          * Register the custom post messages
