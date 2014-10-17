@@ -8,6 +8,8 @@
  * file that was distributed with this source code.
  */
 
+require_once __DIR__ . '/events.php';
+
 /**
  * Slides Table
  *
@@ -90,7 +92,7 @@ class Hyyan_Slider_Table {
     public function printSlidePreview($name, $id) {
         if ($name != self::PREVIEW_COLUMN_NAME)
             return;
-        
+
         $id = get_post_thumbnail_id($id);
         if ($id) {
             $img = wp_get_attachment_image_src(
@@ -116,7 +118,7 @@ class Hyyan_Slider_Table {
             $selected = isset($_GET[$this->taxName]) ? esc_attr($_GET[$this->taxName]) : '';
             $info_taxonomy = get_taxonomy($this->taxName);
             wp_dropdown_categories(array(
-                'show_option_all' => __("Show All {$info_taxonomy->label}",$this->textdomain),
+                'show_option_all' => __("Show All {$info_taxonomy->label}", $this->textdomain),
                 'taxonomy' => $this->taxName,
                 'name' => $this->taxName,
                 'orderby' => 'name',
