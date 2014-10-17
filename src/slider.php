@@ -11,6 +11,7 @@
 require_once __DIR__ . '/events.php';
 require_once __DIR__ . '/table.php';
 require_once __DIR__ . '/shortcode.php';
+require_once __DIR__ . '/metabox-url.php';
 
 /**
  * HyyanSlider
@@ -77,6 +78,14 @@ class Hyyan_Slider {
                 , self::TEXTDOMAIN
         );
         $shortcode->registerSliderShortcode();
+
+
+        $metabox = new Hyyan_Slider_Metabox_URL(
+                self::CUSTOM_POST
+                , self::CUSTOM_TAXONOMY
+                , self::TEXTDOMAIN
+        );
+        $metabox->registerMetabox();
     }
 
     /**

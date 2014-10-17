@@ -110,4 +110,18 @@ interface Hyyan_Slider_Events {
      */
     const FILTER_SHORTCODE_NAME = 'Hyyan\Slider.shortcode-name';
 
+    /**
+     * Filter metabox url markup
+     * 
+     * The filter is fired before the markup of url metabox is printed
+     */
+    const FILTER_METABOX_URL_MARKUP = 'Hyyan\Slider.metabox-url.markup';
+
+    /**
+     * Filter metabox url title
+     * 
+     * The filter is fired before the title of url metabox is rendered
+     */
+    const FIILTER_METABOX_URL_TITLE = 'Hyyan\Slider.metabox-url.title';
+
 }
