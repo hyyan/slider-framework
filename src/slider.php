@@ -10,6 +10,7 @@
 
 require_once __DIR__ . '/events.php';
 require_once __DIR__ . '/table.php';
+require_once __DIR__ . '/shortcode.php';
 
 /**
  * HyyanSlider
@@ -68,6 +69,14 @@ class Hyyan_Slider {
         );
         $table->registerSliderFilter();
         $table->registerSlidePreviewColumn();
+
+
+        $shortcode = new Hyyan_Slider_Shortcode(
+                self::CUSTOM_POST
+                , self::CUSTOM_TAXONOMY
+                , self::TEXTDOMAIN
+        );
+        $shortcode->registerSliderShortcode();
     }
 
     /**

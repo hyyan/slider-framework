@@ -65,4 +65,49 @@ interface Hyyan_Slider_Events {
      */
     const FILTER_SLIDE_PREVIEW_SIZE_NAME = 'Hyyan\Slider.slide.preview-size-name';
 
+    /**
+     * Filter shortcode types
+     * 
+     * the filter is fired to collect slider types before the shortcode is 
+     * resolved
+     */
+    const FILTER_SHORTCODE_TYPES = 'Hyyan\Slider.shortcode-types';
+
+    /**
+     * Filter shortcode atts
+     * 
+     * the filter is fired to edit the default shortcode atts before the 
+     * shortcode is resolved
+     */
+    const FILTER_SHORTCODE_ATTS = 'Hyyan\Slider.shortcode-atts';
+
+    /**
+     * Filter shortcode queryArgs
+     * 
+     * the filter is fired before the query args is passed to the WP_Query object
+     */
+    const FILTER_SHORTCODE_QueryArgs = 'Hyyan\Slider.shortcode-queryargs';
+
+    /**
+     * Filter shortcode contetn
+     * 
+     * the filter is fired before the shortcode content is passed to the shortcode
+     * resolver
+     */
+    const FILTER_SHORTCODE_CONTENT = 'Hyyan\Slider.shortcode-content';
+
+    /**
+     * Filter shortcode response
+     * 
+     * The filter is fired before the shortcode response is returned
+     */
+    const FILTER_SHORTCODE_RESPONSE = 'Hyyan\Slider.shortcode-response';
+
+    /**
+     * Filter shortcode name
+     * 
+     * The filter is fired before the shortcode name is registered
+     */
+    const FILTER_SHORTCODE_NAME = 'Hyyan\Slider.shortcode-name';
+
 }
