@@ -22,7 +22,7 @@ class Hyyan_Slider_Shortcode {
      * 
      * @var string 
      */
-    const SHORTCODE_NAME = 'slider';
+    const SHORTCODE_NAME = 'hyyan-slider';
 
     /**
      * The custom post name
