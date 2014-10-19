@@ -156,6 +156,131 @@ class Hyyan_Slider_Shortcode {
     }
 
     /**
+     * Add support fot Shortcode ulitmate plugin
+     * 
+     * Note : 
+     * =========
+     * A hook named "Hyyan\Slider.shortcode-ulitmate.your-slider-type-name" is 
+     * fired to extend the default controll.
+     * 
+     * for instance : 
+     * 
+     * if your slider type name is : (foo) then the hook name 
+     * will be (Hyyan\Slider.shortcode-ulitmate.foo).
+     * 
+     * @param array $shortcodes
+     * 
+     * @return array
+     * 
+     * @link http://gndev.info/shortcodes-ultimate/ 
+     */
+    public function supportShortcodeUltimate(array $shortcodes) {
+
+        /**
+         * collect sliders types
+         * 
+         * @see Hyyan_Slider_Events::FILTER_SHORTCODE_TYPES
+         * 
+         * @var array 
+         */
+        $types = apply_filters(Hyyan_Slider_Events::FILTER_SHORTCODE_TYPES, array());
+
+        /** add controll for all types */
+        foreach ($types as $name => $handler) {
+
+            $displayName = ucwords(str_replace(
+                            array('-', '_')
+                            , ' '
+                            , $name
+            ));
+
+            $sliders = array_merge(
+                    array('' => '---')
+                    , hyyan_slider_list()
+            );
+
+            // Add new shortcode
+            $args = apply_filters('Hyyan\Slider.shortcode-ulitmate.' . $name, array(
+                // Shortcode name
+                'name' => $displayName,
+                // Shortcode type. Can be 'wrap' or 'single'
+                // Example: [b]this is wrapped[/b], [this_is_single]
+                'type' => 'single',
+                // Shortcode group.
+                // Can be 'content', 'box', 'media' or 'other'.
+                // Groups can be mixed, for example 'content box'
+                'group' => 'media gallery',
+                // List of shortcode params (attributes)
+                'atts' => array(
+                    'slider' => array(
+                        // Attribute type.
+                        // Can be 'select', 'color', 'bool' or 'text'
+                        'type' => 'select',
+                        // Available values
+                        'values' => $sliders,
+                        // Default value
+                        'default' => '',
+                        // Attribute name
+                        'name' => __('Slider', $this->textdomain),
+                        // Attribute description
+                        'desc' => __('Select Slider Name', $this->textdomain)
+                    ),
+                    'order' => array(
+                        // Attribute type.
+                        // Can be 'select', 'color', 'bool' or 'text'
+                        'type' => 'select',
+                        // Available values
+                        'values' => array(
+                            'ASC' => __('Ascending ', $this->textdomain),
+                            'DESC' => __('Descending ', $this->textdomain),
+                        ),
+                        // Default value
+                        'default' => 'DESC',
+                        // Attribute name
+                        'name' => __('Slides Order', $this->textdomain),
+                        // Attribute description
+                        'desc' => __('Select Slides Order', $this->textdomain)
+                    ),
+                    'orderBy' => array(
+                        // Attribute type.
+                        // Can be 'select', 'color', 'bool' or 'text'
+                        'type' => 'select',
+                        // Available values
+                        'values' => array(
+                            'none' => __('No order', $this->textdomain),
+                            'ID' => __('Order by slide id', $this->textdomain),
+                            'author' => __('Order by author', $this->textdomain),
+                            'title' => __('Order by title', $this->textdomain),
+                            'name' => __('Order by slide name', $this->textdomain),
+                            'date' => __('Order by date', $this->textdomain),
+                            'modified' => __('Order by last modified date', $this->textdomain),
+                            'rand' => __('Random order', $this->textdomain),
+                        ),
+                        // Default value
+                        'default' => 'rand',
+                        // Attribute name
+                        'name' => __('Order Slides By', $this->textdomain),
+                        // Attribute description
+                        'desc' => __('Organize slides order', $this->textdomain)
+                    )
+                ),
+                'content' => '',
+                // Shortcode description for cheatsheet and generator
+                'desc' => $displayName,
+                // Custom icon (font-awesome)
+                'icon' => 'photo',
+                // Name of custom shortcode function
+                'function' => $handler
+            ));
+
+            $shortcodes[$name] = $args;
+        }
+
+        // Return modified data
+        return $shortcodes;
+    }
+
+    /**
      * Register the slider shortcode 
      * 
      * @see Hyyan_Slider_Shortcode::FILTER_SHORTCODE_NAME
@@ -165,6 +290,17 @@ class Hyyan_Slider_Shortcode {
                 apply_filters(Hyyan_Slider_Events::FILTER_SHORTCODE_NAME, self::SHORTCODE_NAME)
                 , array($this, 'resolveSliderShortcode')
         );
+    }
+
+    /**
+     * Add support for Shortcode ultimate plugin
+     * 
+     * @see Hyyan_Slider_Shortcode::supportShortcodeUltimate
+     * 
+     * @link http://gndev.info/shortcodes-ultimate/ 
+     */
+    public function registerShortcodeUltimateShortcode() {
+        add_filter('su/data/shortcodes', array($this, 'supportShortcodeUltimate'));
     }
 
 }

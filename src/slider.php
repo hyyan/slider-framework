@@ -79,6 +79,7 @@ class Hyyan_Slider {
                 , self::TEXTDOMAIN
         );
         $shortcode->registerSliderShortcode();
+        $shortcode->registerShortcodeUltimateShortcode();
 
 
         $metabox = new Hyyan_Slider_Metabox_URL(
