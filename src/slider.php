@@ -12,6 +12,7 @@ require_once __DIR__ . '/events.php';
 require_once __DIR__ . '/table.php';
 require_once __DIR__ . '/shortcode.php';
 require_once __DIR__ . '/metabox-url.php';
+require_once __DIR__ . '/functions.php';
 
 /**
  * HyyanSlider
@@ -244,6 +245,7 @@ class Hyyan_Slider {
             'show_in_nav_menus' => true,
             'show_ui' => true,
             'show_admin_column' => true,
+            'show_tagcloud' => false,
             'query_var' => false,
             'rewrite' => false,
             'capabilities' => array(
