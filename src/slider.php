@@ -50,7 +50,7 @@ class Hyyan_Slider {
      * Constrcut the plugin api
      */
     public function __construct() {
-        add_action('init', array($this, 'init'));
+        add_action('init', array($this, 'init'), 0);
     }
 
     /**
