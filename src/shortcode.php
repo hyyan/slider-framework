@@ -118,14 +118,11 @@ class Hyyan_Slider_Shortcode {
          * 
          * @var WP_Query 
          */
-        $query = new WP_Query(apply_filters(Hyyan_Slider_Events::FILTER_SHORTCODE_QueryArgs, array(
-                    'post_type' => $this->postName,
-                    $this->taxName => esc_attr($default['name']),
-                    'post_status' => 'publish',
-                    'order' => esc_attr($default['order']),
-                    'orderby' => esc_attr($default['orderBy']),
-                    'posts_per_page' => -1
-        )));
+        $query = hyyan_slider_query(
+                $default['name']
+                , $default['order']
+                , $default['orderBy']
+        );
 
         $callable = $types[$default['type']];
         if (!is_callable($callable))
@@ -147,7 +144,7 @@ class Hyyan_Slider_Shortcode {
          * @var string 
          */
         $content = apply_filters(Hyyan_Slider_Events::FILTER_SHORTCODE_CONTENT, $content);
-        
+
         /** @see Hyyan_Slider_Events::FILTER_SHORTCODE_RESPONSE */
         return apply_filters(
                 Hyyan_Slider_Events::FILTER_SHORTCODE_RESPONSE
