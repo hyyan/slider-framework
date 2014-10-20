@@ -51,6 +51,20 @@ class Hyyan_Slider {
      */
     public function __construct() {
         add_action('init', array($this, 'init'), 0);
+        add_action('plugins_loaded', array($this, 'loadLanguages'));
+    }
+
+    /**
+     * Languages Load
+     * 
+     * Load the plugin langs
+     */
+    public function loadLanguages() {
+        load_plugin_textdomain(
+                self::TEXTDOMAIN
+                , false
+                , trailingslashit(basename(dirname(dirname(__FILE__)))) . '/languages/'
+        );
     }
 
     /**
@@ -247,7 +261,7 @@ class Hyyan_Slider {
             'show_ui' => true,
             'show_admin_column' => true,
             'show_tagcloud' => false,
-            'query_var' => false,
+            'query_var' => true,
             'rewrite' => false,
             'capabilities' => array(
                 'manage_terms' => 'edit_posts',

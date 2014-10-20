@@ -5,10 +5,6 @@ $checkbox_input = self::METABOX_ID . '-input-checkbox';
 
 <?php wp_nonce_field(self::METABOX_ID, self::METABOX_ID); ?>
 <p>
-    <?php _e("Set a custom link for the current slide.", $this->textdomain); ?>
-</p>
-<hr>
-<p>
     <label for="<?php echo $url_input ?>">
         <?php _e("Slide URL  :", $this->textdomain); ?>
     </label>

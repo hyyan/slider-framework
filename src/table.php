@@ -118,7 +118,7 @@ class Hyyan_Slider_Table {
             $selected = isset($_GET[$this->taxName]) ? esc_attr($_GET[$this->taxName]) : '';
             $info_taxonomy = get_taxonomy($this->taxName);
             wp_dropdown_categories(array(
-                'show_option_all' => __("Show All {$info_taxonomy->label}", $this->textdomain),
+                'show_option_all' => __("Show All", $this->textdomain)." " .$info_taxonomy->label,
                 'taxonomy' => $this->taxName,
                 'name' => $this->taxName,
                 'orderby' => 'name',
