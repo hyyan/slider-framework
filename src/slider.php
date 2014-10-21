@@ -52,6 +52,7 @@ class Hyyan_Slider {
     public function __construct() {
         add_action('init', array($this, 'init'), 0);
         add_action('plugins_loaded', array($this, 'loadLanguages'));
+        add_filter('pll_get_post_types', array($this, 'addPloylangSupport'));
     }
 
     /**
@@ -256,7 +257,7 @@ class Hyyan_Slider {
         $args = apply_filters(Hyyan_Slider_Events::FILTER_SLIDER_ARGS, array(
             'labels' => $labels,
             'hierarchical' => false,
-            'public' => false,
+            'public' => true,
             'show_in_nav_menus' => true,
             'show_ui' => true,
             'show_admin_column' => true,
@@ -275,6 +276,18 @@ class Hyyan_Slider {
          * Register the custom taxonomy
          */
         register_taxonomy(self::CUSTOM_TAXONOMY, array(self::CUSTOM_POST), $args);
+    }
+
+    /**
+     * Add support for ploylang plugin 
+     * 
+     * @param array $types
+     * @return array
+     */
+    public function addPloylangSupport($types) {
+        return array_merge($types, array(
+            self::CUSTOM_POST => self::CUSTOM_POST
+        ));
     }
 
 }
