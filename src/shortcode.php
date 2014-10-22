@@ -96,9 +96,9 @@ class Hyyan_Slider_Shortcode {
             'name' => '',
             'type' => '',
             'order' => 'DESC',
-            'orderBy' => 'rand')
-                        , $atts)
-        );
+            'orderBy' => 'rand',
+            'class' => 'default'), $atts
+        ));
 
         if (!isset($default['name']) || !term_exists($default['name'], $this->taxName))
             return sprintf(
@@ -109,7 +109,25 @@ class Hyyan_Slider_Shortcode {
 
 
         if (!isset($default['type']) || !array_key_exists($default['type'], $types))
-            return sprintf('<pre>%s</pre>', __('Unsupported slider type.', $this->textdomain));
+            return sprintf(
+                    '<pre>%s "%s"</pre>'
+                    , __('Unsupported slider type', $this->textdomain)
+                    , $default['type']
+            );
+
+        $type = $default['type'];
+        
+        if (
+                !isset($default['class']) ||
+                !((isset($types[$type]['classes']) && is_array($types[$type]['classes'])) && array_key_exists($default['class'], $types[$type]['classes']))
+        )
+            return sprintf(
+                    '<pre>%s "%s" %s "%s"</pre>'
+                    , __('Slider', $this->textdomain)
+                    , $default['type']
+                    , __('does not support class', $this->textdomain)
+                    , $default['class']
+            );
 
         /**
          * Query object
@@ -124,11 +142,11 @@ class Hyyan_Slider_Shortcode {
                 , $default['orderBy']
         );
 
-        $callable = $types[$default['type']];
+        $callable = @$types[$type]['handler'];
         if (!is_callable($callable))
             return sprintf(
                     '<pre>%s %s</pre>'
-                    , (string) $default['type']
+                    , $type
                     , __(
                             'does not provide a callable function or method to '
                             . 'generate the content.'
@@ -150,7 +168,7 @@ class Hyyan_Slider_Shortcode {
                 Hyyan_Slider_Events::FILTER_SHORTCODE_RESPONSE
                 , call_user_func_array(
                         $callable
-                        , array($default, $content, $query)
+                        , array($default, $content, $query, $default['class'])
                 )
         );
     }
@@ -186,7 +204,7 @@ class Hyyan_Slider_Shortcode {
         $types = apply_filters(Hyyan_Slider_Events::FILTER_SHORTCODE_TYPES, array());
 
         /** add controll for all types */
-        foreach ($types as $name => $handler) {
+        foreach ($types as $name => $info) {
 
             $displayName = ucwords(str_replace(
                             array('-', '_')
@@ -262,6 +280,19 @@ class Hyyan_Slider_Shortcode {
                         'name' => __('Order Slides By', $this->textdomain),
                         // Attribute description
                         'desc' => __('Organize slides order', $this->textdomain)
+                    ),
+                    'class' => array(
+                        // Attribute type.
+                        // Can be 'select', 'color', 'bool' or 'text'
+                        'type' => 'select',
+                        // Available values
+                        'values' => isset($info['classes']) ? $info['classes'] : array(),
+                        // Default value
+                        'default' => 'default',
+                        // Attribute name
+                        'name' => __('Slider Class', $this->textdomain),
+                        // Attribute description
+                        'desc' => __('Choose slider class', $this->textdomain)
                     )
                 ),
                 'content' => '',
@@ -270,7 +301,7 @@ class Hyyan_Slider_Shortcode {
                 // Custom icon (font-awesome)
                 'icon' => 'photo',
                 // Name of custom shortcode function
-                'function' => $handler
+                'function' => isset($info['handler']) ? $info['handler'] : ''
             ));
 
             $shortcodes[$name] = $args;
