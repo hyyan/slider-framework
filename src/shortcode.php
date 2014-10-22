@@ -116,7 +116,7 @@ class Hyyan_Slider_Shortcode {
             );
 
         $type = $default['type'];
-        
+
         if (
                 !isset($default['class']) ||
                 !((isset($types[$type]['classes']) && is_array($types[$type]['classes'])) && array_key_exists($default['class'], $types[$type]['classes']))
@@ -220,7 +220,7 @@ class Hyyan_Slider_Shortcode {
             // Add new shortcode
             $args = apply_filters('Hyyan\Slider.shortcode-ulitmate.' . $name, array(
                 // Shortcode name
-                'name' => $displayName,
+                'name' => isset($info['name']) ? $info['name'] : $displayName,
                 // Shortcode type. Can be 'wrap' or 'single'
                 // Example: [b]this is wrapped[/b], [this_is_single]
                 'type' => 'single',
@@ -297,7 +297,7 @@ class Hyyan_Slider_Shortcode {
                 ),
                 'content' => '',
                 // Shortcode description for cheatsheet and generator
-                'desc' => $displayName,
+                'desc' => isset($info['desc']) ? $info['desc'] : $displayName,
                 // Custom icon (font-awesome)
                 'icon' => 'photo',
                 // Name of custom shortcode function

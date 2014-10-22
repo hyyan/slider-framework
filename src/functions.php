@@ -58,7 +58,7 @@ function hyyan_slider_query($slider, $order = 'DESC', $orderBy = 'rand') {
  * @return array
  */
 function hyyan_slider_list() {
-    
+
     $terms = get_terms(Hyyan_Slider::CUSTOM_TAXONOMY, array(
         'orderby' => 'count',
         'hide_empty' => 0
