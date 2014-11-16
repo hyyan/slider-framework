@@ -82,8 +82,14 @@ class Hyyan_Slider_Metabox_URL {
                 )
                 , array($this, 'metaboxMarkup')
                 , $this->postName
-                , 'side'
-                , 'high'
+                , apply_filters(
+                        Hyyan_Slider_Events::FIILTER_METABOX_URL_CONTEXT
+                        , 'side'
+                )
+                , apply_filters(
+                        Hyyan_Slider_Events::FIILTER_METABOX_URL_PRIORITY
+                        , 'high'
+                )
         );
     }
 

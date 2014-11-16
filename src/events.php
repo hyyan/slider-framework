@@ -124,4 +124,18 @@ interface Hyyan_Slider_Events {
      */
     const FIILTER_METABOX_URL_TITLE = 'Hyyan\Slider.metabox-url.title';
 
+    /**
+     * Filter metabox url context
+     * 
+     * The filter is fired before the context of the url metabox is set
+     */
+    const FIILTER_METABOX_URL_CONTEXT = 'Hyyan\Slider.metabox-url.context';
+
+    /**
+     * Filter metabox url priority
+     * 
+     * The filter is fired before the priority of the url metabox is set
+     */
+    const FIILTER_METABOX_URL_PRIORITY = 'Hyyan\Slider.metabox-url.priority';
+
 }
