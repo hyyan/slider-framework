@@ -13,7 +13,7 @@
  * Plugin URI: https://github.com/hyyan/slider/
  * Description: Wordpress plugin to create wordpress sliders using custom post types and taxonomies
  * Author: Hyyan Abo Fakher
- * Version: 0.2
+ * Version: 0.3
  * Author URI: https://github.com/hyyan
  * GitHub Plugin URI: hyyan/slider
  * Domain Path: /languages

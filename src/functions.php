@@ -30,7 +30,22 @@ function hyyan_slider_query($slider, $order = 'DESC', $orderBy = 'rand') {
                 'Can not build query for %s slider - term does not exist'
                 , $slider
         ));
-    
+
+    if (function_exists('pll_get_term')) {
+        // get slider object
+        $term = get_term_by('slug', $slider, Hyyan_Slider::CUSTOM_TAXONOMY);
+        $slider = $term->slug;
+        if ($term) {
+            // find the id of translated slider
+            $id = pll_get_term($term->term_id);
+            // get translated slider object
+            $trans_term = get_term($id, Hyyan_Slider::CUSTOM_TAXONOMY);
+            if($trans_term && !($trans_term instanceof WP_Error)){
+                $slider = $trans_term->slug;
+            }
+        }
+    }
+
     /**
      * Query object
      * 
@@ -41,11 +56,12 @@ function hyyan_slider_query($slider, $order = 'DESC', $orderBy = 'rand') {
     $query = new WP_Query(apply_filters(Hyyan_Slider_Events::FILTER_SHORTCODE_QueryArgs, array(
                 'post_type' => Hyyan_Slider::CUSTOM_POST,
                 'taxonomy' => Hyyan_Slider::CUSTOM_TAXONOMY,
-                'term' => function_exists('pll_get_term') ? @pll_get_term($slider) : $slider,
+                'term' =>  $slider,
                 'post_status' => 'publish',
                 'order' => esc_attr($order),
                 'orderby' => esc_attr($orderBy),
-                'posts_per_page' => -1
+                'posts_per_page' => -1,
+                'lang' => null
     )));
 
     return $query;
