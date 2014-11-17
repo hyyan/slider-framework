@@ -30,8 +30,7 @@ function hyyan_slider_query($slider, $order = 'DESC', $orderBy = 'rand') {
                 'Can not build query for %s slider - term does not exist'
                 , $slider
         ));
-
-
+    
     /**
      * Query object
      * 
@@ -42,7 +41,7 @@ function hyyan_slider_query($slider, $order = 'DESC', $orderBy = 'rand') {
     $query = new WP_Query(apply_filters(Hyyan_Slider_Events::FILTER_SHORTCODE_QueryArgs, array(
                 'post_type' => Hyyan_Slider::CUSTOM_POST,
                 'taxonomy' => Hyyan_Slider::CUSTOM_TAXONOMY,
-                'term' => $slider,
+                'term' => function_exists('pll_get_term') ? @pll_get_term($slider) : $slider,
                 'post_status' => 'publish',
                 'order' => esc_attr($order),
                 'orderby' => esc_attr($orderBy),
