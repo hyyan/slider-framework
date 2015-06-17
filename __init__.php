@@ -9,15 +9,15 @@
  */
 
 /*
- * Plugin Name: Hyyan Slider
- * Plugin URI: https://github.com/hyyan/slider/
+ * Plugin Name: Hyyan Slider Framework
+ * Plugin URI: https://github.com/hyyan/slider-framework/
  * Description: Wordpress plugin to create wordpress sliders using custom post types and taxonomies
  * Author: Hyyan Abo Fakher
  * Version: 0.3
  * Author URI: https://github.com/hyyan
- * GitHub Plugin URI: hyyan/slider
+ * GitHub Plugin URI: hyyan/slider-framework
  * Domain Path: /languages
- * Text Domain: hyyan-slider
+ * Text Domain: hyyan-slider-framework
  * License: MIT License
  */
 
