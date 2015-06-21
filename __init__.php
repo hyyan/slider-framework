@@ -9,7 +9,7 @@
  */
 
 /*
- * Plugin Name: Hyyan Slider Framework
+ * Plugin Name: Hyyan Ultimate Sliders
  * Plugin URI: https://github.com/hyyan/slider-framework/
  * Description: Wordpress plugin to create wordpress sliders using custom post types and taxonomies
  * Author: Hyyan Abo Fakher
